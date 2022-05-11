@@ -1,35 +1,12 @@
 #!/usr/bin/env python3
 
-from PIL import Image
 import os
+from PIL import Image
 
-path = '/home/amurillo/pruebas/images/'
-images = os.listdir(path)
+images_path = '/home/amurillo/workspace/finalproject_Coursera/supplier-data/images/'
 
-for image in images:
-	if image.endswith('tiff'):
-		infile = path + image
-		
-		f, e = os.path.splitext(image)
-		jpgfile = f + '.jpeg'
-		outfile = path + jpgfile
-		with Image.open(infile) as im:
-			# outfile = im.convert('RGB')
-			im.convert('RGB')
-			im.save(outfile)
-
-
-
-
-# for infile in sys.argv[1:]:
-#     f, e = os.path.splitext(infile)
-#     outfile = f + '.jpg'
-#     print(infile)
-#     print(outfile)
-#     if infile != outfile:
-#         try:
-#             with Image.open(infile) as im:
-#                 # im.convert('RGB')
-#                 im.save(outfile, 'JPEG')
-#         except OSError as e:
-#             print(e)
+for f in os.listdir(images_path):
+    if f.endswith('.tiff'):
+        i = Image.open(images_path + f)
+        fname, fext = os.path.splitext(f)
+        i.convert('RGB').resize((600, 400)).save(f'/home/amurillo/workspace/finalproject_Coursera/supplier-data/images/{fname}.jpeg')
