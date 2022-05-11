@@ -1,6 +1,12 @@
 #!/usr/bin/env python3
 
+import os
 from PIL import Image
 
-im = Image.open('/home/amurillo/pruebas/001.tiff')
-im.convert('RGB').resize((600, 400)).save('/home/amurillo/pruebas/001.jpeg')
+images_path = '/home/amurillo/workspace/finalproject_Coursera/supplier-data/images/'
+
+for f in os.listdir(images_path):
+    if f.endswith('.tiff'):
+        i = Image.open(images_path + f)
+        fname, fext = os.path.splitext(f)
+        i.convert('RGB').resize((600, 400)).save(f'/home/amurillo/workspace/finalproject_Coursera/supplier-data/images/{fname}.jpeg')
