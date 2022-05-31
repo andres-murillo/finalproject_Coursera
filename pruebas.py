@@ -18,7 +18,7 @@ fruit = {
     "grapes": 13
 }
 
-report = SimpleDocTemplate("/home/amurillo/report.pdf")
+report = SimpleDocTemplate("report.pdf")
 
 styles = getSampleStyleSheet()
 
