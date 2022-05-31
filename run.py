@@ -8,8 +8,6 @@ desc_path = '/home/amurillo/workspace/finalproject_Coursera/supplier-data/descri
 
 desc_filelist = os.listdir(desc_path)
 
-# print(desc_filelist)
-
 payload = {'name': '', 'weight': '', 'description': '', 'image_name':''}
 
 keys = ['name', 'weight', 'description', 'image_name']
@@ -21,12 +19,15 @@ def post_dict(filelist, filepath):
         with open(file, 'r') as f:
             keynumber = 0
             for line in f.readlines():
-                payload[keys[keynumber]] = line.strip()
+                if keynumber == 1:
+                    payload[keys[keynumber]] = int(line.rstrip(' lbs\n'))
+                else:
+                    payload[keys[keynumber]] = line.strip()
                 keynumber += 1
-        # resp = requests.post('https://example.com/path/to/api', data=payload)
-        # print(f'Status code: {resp.status_code}')
-        # print(resp.text)
         payload['image_name'] = img_name
+        resp = requests.post('https://example.com/path/to/api', data=payload)
+        print(f'Status code: {resp.status_code}')
+        print(resp.text)
         print(payload)
 
 def main():
