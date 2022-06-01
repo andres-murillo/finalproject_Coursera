@@ -25,9 +25,9 @@ def post_dict(filelist, filepath):
                     payload[keys[keynumber]] = line.strip()
                 keynumber += 1
         payload['image_name'] = img_name
-        resp = requests.post('https://example.com/path/to/api', data=payload)
-        print(f'Status code: {resp.status_code}')
-        print(resp.text)
+        # resp = requests.post('https://example.com/path/to/api', data=payload)
+        # print(f'Status code: {resp.status_code}')
+        # print(resp.text)
         print(payload)
 
 def main():

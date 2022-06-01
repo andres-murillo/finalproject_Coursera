@@ -6,7 +6,9 @@ from reportlab.lib.units import inch
 from reportlab.lib import colors
 from reportlab.graphics.shapes import Drawing
 from reportlab.graphics.charts.piecharts import Pie
+from datetime import date
 
+today = date.today().strftime('%B %d, %Y')
 
 fruit = {
     "elderberries": 1,
@@ -22,7 +24,7 @@ report = SimpleDocTemplate("report.pdf")
 
 styles = getSampleStyleSheet()
 
-report_title = Paragraph("A Complete Inventory of My Fruit", styles["h1"])
+report_title = Paragraph(f"A Complete Inventory of My Fruit on {today}", styles["h1"])
 
 table_data = []
 
