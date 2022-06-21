@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 
 import os
+from posixpath import split
 from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer, Table, Image
 from reportlab.lib.styles import getSampleStyleSheet
 from datetime import date
@@ -11,7 +12,7 @@ desc_filelist = os.listdir(desc_path)
 today = date.today().strftime('%B %d, %Y')
 styles = getSampleStyleSheet()
 report = SimpleDocTemplate('processed.pdf')
-report_title = Paragraph(f'Processed Update on {today}', styles['h1'])
+report_title = Paragraph(f' Processed Update on {today}', styles['h1'])
 
 def items_weight(filelist, filepath):
     fruits = {}
@@ -30,10 +31,12 @@ def items_weight(filelist, filepath):
                     keynumber += 1
     print(fruits)
     for k, v in fruits.items():
-        name_fruit = 'name: ' + k
+        name_fruit = 'name: ' + k + '\n'
         weight_fruit = 'weight: ' + v
-        table_data.append([name_fruit, weight_fruit])
-    report_table = Table(data=table_data)
+        fruit_complete = name_fruit + weight_fruit
+        separador = '\n'
+        table_data.append([fruit_complete, separador])
+    report_table = Table(data=table_data, hAlign='LEFT')
     return report_table
 
 # def generate_report(attachment, title, paragraph):
