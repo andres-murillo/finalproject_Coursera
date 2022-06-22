@@ -4,8 +4,8 @@
 # Report an error if available disk space is lower than 20%
 # Report an error if available memory is less than 500MB
 # Report an error if the hostname "localhost" cannot be resolved to "127.0.0.1"
-# Complete the script to check the system statistics every 60 seconds, 
-# and in event of any issues detected among the ones mentioned above, 
+# Complete the script to check the system statistics every 60 seconds,
+# and in event of any issues detected among the ones mentioned above,
 # an email should be sent with the following content:
 # From: automation@example.com
 # To: username@example.com
@@ -30,24 +30,51 @@ import mimetypes
 import smtplib
 import shutil
 import psutil
+import socket
 
-message = EmailMessage()
-sender = 'test@mercaprog.com'
-recipient = 'amurillo@mercaprog.com'
+def range_bytes(size_bytes):
+    return size_bytes / 1_048_576, 'megabytes'
 
-mail_server = smtplib.SMTP_SSL('mail.mercaprog.com')
-mail_pass = 'n7L26F4HUf'
+drive = '/'
 
-message['From'] = sender
-message['To'] = recipient
-message['Subject'] = 'Greetings from {} to {}!'.format(sender, recipient)
+du = shutil.disk_usage(drive)
+mu = psutil.virtual_memory()
+cpu_core_count = psutil.cpu_count(logical=False)
+cpu_logical_count = psutil.cpu_count(logical=True)
+cpu_usage = psutil.cpu_percent(interval=1)
+localhost_ip = socket.gethostbyname('localhost')
 
-body = '''Hey there!
+print('Space usage for {}:'.format(drive))
+print('Total space in {}: {:.2f} {}'.format(drive, range_bytes(du.total)[0], range_bytes(du.total)[1]))
+print('Free space in  {}: {:.2f} {}'.format(drive, range_bytes(du.free)[0], range_bytes(du.free)[1]))
+print(f'Porcentaje uso disco: {(du.used / du.total) * 100:.2f}%')
+print()
+print('Memory usage:')
+print('Avail memory: {:.2f} {}'.format( range_bytes(mu.available)[0], range_bytes(mu.available)[1]))
+print()
+print('CPU Statistics:')
+print('CPU Usage %: {}'.format(cpu_usage))
+print()
+print(f'localhost ip: {localhost_ip}')
 
-I'm learning to send emails using Python!!'''
+# #######################
+# message = EmailMessage()
+# sender = 'test@mercaprog.com'
+# recipient = 'amurillo@mercaprog.com'
 
-message.set_content(body)
+# mail_server = smtplib.SMTP_SSL('mail.mercaprog.com')
+# mail_pass = 'n7L26F4HUf'
 
-mail_server.login(sender, mail_pass)
-mail_server.send_message(message)
-mail_server.quit()
+# message['From'] = sender
+# message['To'] = recipient
+# message['Subject'] = 'Greetings from {} to {}!'.format(sender, recipient)
+
+# body = '''Hey there!
+
+# I'm learning to send emails using Python!!'''
+
+# message.set_content(body)
+
+# mail_server.login(sender, mail_pass)
+# mail_server.send_message(message)
+# mail_server.quit()
