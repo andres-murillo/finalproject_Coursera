@@ -1,0 +1,24 @@
+- download_drive.sh: to download the supplier-data.tar.gz file.
+
+- example_upload.py: to upload an example image to http://localhost/upload/
+
++ changeImage.py: to process the supplier images - Changes resolution and image format. DONE.
+
++ supplier_image_upload.py: takes the jpg images from the supplier-data/images folder and uploads them to web server fruit catalog. DONE.
+
++ run.py: to process the text files (001.txt, 003.txt, etc) from supplier-data/descriptions folder. DONE.
+
++ reports.py: script to generate PDF report to supplier.
+	- Method: generate_report(): to build the pdf reports.
+
++ report_email.py: to process supplier fruit description data from supplier-data/descriptions folder
+	- Call the reports.generate_report method: reports.generate_report(attachment, title, paragraph)
+
++ emails.py: to send emails.
+	- Method: generate_email()
+	- Method: send_email()
+	- Method: generate_error_report(): to send mails without attachment
+
++ health_check.py: to monitor some system statistics, if there is any problem, sends an email
+	- Calls method emails.generate_error_report() to send mail in case of error.
+

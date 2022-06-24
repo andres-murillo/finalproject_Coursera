@@ -14,9 +14,10 @@ styles = getSampleStyleSheet()
 report = SimpleDocTemplate('processed.pdf')
 report_title = Paragraph(f' Processed Update on {today}', styles['h1'])
 
-def items_weight(filelist, filepath):
+def generate_report(filelist, filepath):
+    '''Generates processed.pdf report using the file list and file path'''
     fruits = {}
-    fruta = ''
+    fruit = ''
     table_data = []
     for textfile in filelist:
         file = filepath + textfile
@@ -25,28 +26,22 @@ def items_weight(filelist, filepath):
             for line in f.readlines():
                 if keynumber <= 1:
                     if keynumber == 0:
-                        fruta = line.strip()
+                        fruit = line.strip()
                     else:
-                        fruits[fruta] = line.strip()
+                        fruits[fruit] = line.strip()
                     keynumber += 1
-    print(fruits)
     for k, v in fruits.items():
         name_fruit = 'name: ' + k + '\n'
         weight_fruit = 'weight: ' + v
         fruit_complete = name_fruit + weight_fruit
-        separador = '\n'
-        table_data.append([fruit_complete, separador])
+        separator = '\n'
+        table_data.append([fruit_complete, separator])
     report_table = Table(data=table_data, hAlign='LEFT')
+    report.build([report_title, report_table])
     return report_table
 
-# def generate_report(attachment, title, paragraph):
-#     pass
-
 def main():
-    # items_weight(desc_filelist, desc_path)
-    reporte_tabla = items_weight(desc_filelist, desc_path)
-    # print(reporte_tabla)
-    report.build([report_title, reporte_tabla])
+    generate_report(desc_filelist, desc_path)
 
 if __name__ == '__main__':
     main()
