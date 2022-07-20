@@ -14,13 +14,13 @@ styles = getSampleStyleSheet()
 report = SimpleDocTemplate('processed.pdf')
 report_title = Paragraph(f' Processed Update on {today}', styles['h1'])
 
-def generate_report(filelist, filepath):
+def generate_report(attachment, title, filelist):
     '''Generates processed.pdf report using the file list and file path'''
     fruits = {}
     fruit = ''
     table_data = []
     for textfile in filelist:
-        file = filepath + textfile
+        file = attachment + textfile
         keynumber = 0
         with open(file, 'r')  as f:
             for line in f.readlines():
@@ -37,11 +37,11 @@ def generate_report(filelist, filepath):
         separator = '\n'
         table_data.append([fruit_complete, separator])
     report_table = Table(data=table_data, hAlign='LEFT')
-    report.build([report_title, report_table])
+    report.build([title, report_table])
     return report_table
 
 def main():
-    generate_report(desc_filelist, desc_path)
+    generate_report(desc_path, report_title, desc_filelist)
 
 if __name__ == '__main__':
     main()
