@@ -1,4 +1,4 @@
 supplier-data.tar.gz
 .vscode/
 *.pdf
-
+__pycache__/

@@ -9,20 +9,20 @@
 + run.py: to process the text files (001.txt, 003.txt, etc) from supplier-data/descriptions folder. DONE.
 
 + reports.py: script to generate PDF report to supplier. PENDING!!!
-	- Method: generate_report(attachment, title, paragraph): to build the pdf reports.
+	- reports.generate_report(attachment, title, paragraph): to build the pdf reports.
 	- Arguments:
-		- PARAGRAPH: the text description processed from the text files. PENDING!!!
+		- PARAGRAPH: the text description processed from the text files. DONE.
 		- TITLE: The title of the pdf. DONE.
 		- ATTACHMENT: The file path of the PDF to be generated. DONE.
 
-+ report_email.py: to process supplier fruit description data from supplier-data/descriptions folder. PENDING!!!
++ report_email.py: to process supplier fruit description data from supplier-data/descriptions folder. DONE.
 	- Call the reports.generate_report method: reports.generate_report(attachment, title, paragraph)
 
-+ emails.py: to send emails.
++ emails.py: to send emails. PENDING!!!
 	- Method: generate_email()
 	- Method: send_email()
-	- Method: generate_error_report(): to send mails without attachment
+	- Method: generate_error_report(): to send mails without attachment.
 
-+ health_check.py: to monitor some system statistics, if there is any problem, sends an email
++ health_check.py: to monitor some system statistics, if there is any problem, sends an email. PENDING!!!
 	- Calls method emails.generate_error_report() to send mail in case of error.
 
