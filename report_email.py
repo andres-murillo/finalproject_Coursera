@@ -3,12 +3,17 @@
 import os 
 from datetime import date
 import reports
+import emails
 
 desc_path = '/home/amurillo/workspace/finalproject_Coursera/supplier-data/descriptions/'
 desc_filelist = os.listdir(desc_path)
 today = date.today().strftime('%B %d, %Y')
 title =  (f' Processed Update on {today}')
-attachment = '/home/amurillo/workspace/finalproject_Coursera/processed.pdf'
+Attachment = '/home/amurillo/workspace/finalproject_Coursera/processed.pdf'
+From = 'test@mercaprog.com'
+To = 'amurillo@mercaprog.com'
+Subject = 'Upload Completed - Online Fruit Store'
+Body = 'All fruits are uploaded to our website successfully. A detailed list is attached to this email.'
 
 def generate_paragraph(filelist, files_path):
     fruits = {}
@@ -35,7 +40,9 @@ def generate_paragraph(filelist, files_path):
 
 def main():
     paragraph = generate_paragraph(desc_filelist, desc_path)
-    reports.generate_report(attachment, title, paragraph)
+    reports.generate_report(Attachment, title, paragraph)
+    message = emails.generate_email(From, To, Subject, Body, Attachment)
+    emails.send_email(message, From)
 
 if __name__ == '__main__':
     main()

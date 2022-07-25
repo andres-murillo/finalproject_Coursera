@@ -32,6 +32,8 @@ import shutil
 import psutil
 import socket
 
+cpu_threshold = 80.0
+
 def range_bytes(size_bytes):
     return size_bytes / 1_048_576, 'megabytes'
 
@@ -43,6 +45,11 @@ cpu_core_count = psutil.cpu_count(logical=False)
 cpu_logical_count = psutil.cpu_count(logical=True)
 cpu_usage = psutil.cpu_percent(interval=1)
 localhost_ip = socket.gethostbyname('localhost')
+
+if cpu_usage >= cpu_threshold:
+    print('CPU Stressed')
+else:
+    print('CPU Relaxed')
 
 print('Space usage for {}:'.format(drive))
 print('Total space in {}: {:.2f} {}'.format(drive, range_bytes(du.total)[0], range_bytes(du.total)[1]))

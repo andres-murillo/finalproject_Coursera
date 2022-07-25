@@ -18,9 +18,9 @@
 + report_email.py: to process supplier fruit description data from supplier-data/descriptions folder. DONE.
 	- Call the reports.generate_report method: reports.generate_report(attachment, title, paragraph)
 
-+ emails.py: to send emails. PENDING!!!
-	- Method: generate_email()
-	- Method: send_email()
++ emails.py: to send emails. DONE.
+	- Method: generate_email() - DONE
+	- Method: send_email() - DONE
 	- Method: generate_error_report(): to send mails without attachment.
 
 + health_check.py: to monitor some system statistics, if there is any problem, sends an email. PENDING!!!
