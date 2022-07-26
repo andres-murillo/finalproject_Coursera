@@ -2,6 +2,7 @@
 
 import os
 import requests
+import json
 
 img_path = '/home/amurillo/workspace/finalproject_Coursera/supplier-data/images/'
 desc_path = '/home/amurillo/workspace/finalproject_Coursera/supplier-data/descriptions/'
@@ -25,10 +26,11 @@ def post_dict(filelist, filepath):
                     payload[keys[keynumber]] = line.strip()
                 keynumber += 1
         payload['image_name'] = img_name
+        payloadnew = json.dumps(payload)
         # resp = requests.post('https://example.com/path/to/api', data=payload)
         # print(f'Status code: {resp.status_code}')
         # print(resp.text)
-        print(payload)
+        print(payloadnew)
 
 def main():
     post_dict(desc_filelist, desc_path)
